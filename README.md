@@ -17,3 +17,4 @@ If you are interested in using this software, feel free to contact me at elias.a
 * Improve interface (define a format for specifying how the job looks, read specification and act accordingly).
 * Add additional features.
 * Add support for relation extraction.
+* Verify that everything works with the feature extraction and vectorising pipeline.
