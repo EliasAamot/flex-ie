@@ -15,7 +15,7 @@ USE_POS_FEATURES = True
 USE_ANN_FEATURES = False
 USE_WRD_FEATURES = True
 USE_HAS_DEP_FEATURES = True
-USE_DEP_LEMMA_FEATURES = True
+USE_DEP_LEMMA_FEATURES = False
 USE_HAS_GOV_FEATURES = False
 USE_GOV_LEMMA_FEATURES = False
 
@@ -42,14 +42,10 @@ def extract_lemma_feature(index, sentence, feature_dict):
   feature_dict["lemma"] = sentence.lemmas[index] 
 
 def extract_has_dependent_features(index, sentence, feature_dict):
-  deps = [dep.dep_type for dep in sentence.get_dependencies_of(index)]
-  for dep in deps:
-    feature_dict["has_dependency_" + dep] = True 
+  feature_dict["has_dependency"] = [dep.dep_type for dep in sentence.get_dependencies_of(index)]
 
 def extract_dependent_lemma_features(index, sentence, feature_dict):
-  deps = [dep for dep in sentence.get_dependencies_of(index)]
-  for dep in deps:
-    feature_dict["dependency_" + dep.dep_type + "_" + sentence.lemma_at(dep.dependent)] = True
+  feature_dict["dependency_lemma"] = [dep.dep_type + "-" + sentence.lemma_at(dep.dependent) in sentence.get_dependencies_of(index)]
 
 def extract_has_governor_features(index, sentence, feature_dict):
   deps = [dep.dep_type for dep in sentence.get_governor_of(index)]
