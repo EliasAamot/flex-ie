@@ -9,6 +9,7 @@ If you are interested in using this software, feel free to contact me at elias.a
 ## Version history:
 
 0.0.1: Somewhat functioning NER extraction system
+
 0.0.2: System now able to deal with large data sets, by writing temporary data to disk.
 
 ## Short term TODOs:
