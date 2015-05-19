@@ -30,7 +30,6 @@ def read_data(folder, cats, annotation_extention):
               sentence.offsets.append((int(token.find("CharacterOffsetBegin").text),
                 int(token.find("CharacterOffsetEnd").text)))
             for dep in xml_sentence.find("dependencies[@type='collapsed-ccprocessed-dependencies']"):
-              # TODO which deps?
               governor = int(dep.find("governor").attrib["idx"])-1
               dependent = int(dep.find("dependent").attrib["idx"])-1
               dep_type = dep.attrib["type"]
@@ -38,7 +37,7 @@ def read_data(folder, cats, annotation_extention):
             sentences.append(sentence)
         # Read annotations
         annotated_spans = dict()
-        ann_file = open(folder+filename+annotation_extention, 'r')
+        ann_file = open(folder+filename+"."+annotation_extention, 'r')
         for line in ann_file:
             line = line.strip()
             line = line.split()
