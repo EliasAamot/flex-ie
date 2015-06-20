@@ -40,9 +40,11 @@ class Sentence:
          dependencies.append(dependency)
      return dependencies
 
-
     def lemma_at(self, index):
       return self.lemmas[index]
+
+    def class_at(self, index):
+      return self.annotations[index]
 
 class Dependency:
 

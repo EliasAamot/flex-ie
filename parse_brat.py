@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 from sentence import Sentence, Dependency
 
 def read_data(folder, cats, annotation_extention):
-    filenames = set([filename[:filename.index('.')] for filename in os.listdir(folder)])
+    filenames = set([filename[:filename.rfind('.')] for filename in os.listdir(folder)])
     docs = [] 
     for filename in filenames:
         # Read parsed document

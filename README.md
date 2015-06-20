@@ -14,10 +14,7 @@ If you are interested in using this software, feel free to contact me at elias.a
 
 0.0.3: Implemented basic config-file interface. This will be improved further.
 
-## Short term TODOs:
-
-* Add support for relation extraction.
-* Feature extraction and vectorising seems to have a negative effect on precision and recall. Figure out why, and fix it.
+0.0.4: System now supports multiple extraction steps, and features can be specified on a per-step basis.
 
 ## Plan
 
@@ -30,3 +27,15 @@ Possible post MVV plans:
 * Intelligent feature selection
 * Word embedding based features
 * Structural rules
+
+## Short term TODOs:
+
+* Add support for relation extraction.
+* Evaluation procedures
+* Write output to brat format
+* Feature extraction and vectorising seems to have a negative effect on precision and recall. Figure out why, and fix it.
+* Add support for aspect extraction (negation etc.)
+
+## Post MVV TODOS:
+
+* Choose between multiclass classification (current approach) or two-part classification: First binary (no tag vs. tag), then multiclass to set actual class.

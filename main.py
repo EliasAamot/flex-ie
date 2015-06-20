@@ -14,23 +14,23 @@ def load_configs(filename):
   f.close()
   return j
 
-def run_component(data_folder, categories, annotation_extention):
+def run_component(data_folder, annotation_extention, categories, features_to_use):
   print "Parsing data files..."
   docs = parse_brat.read_data(data_folder, categories, annotation_extention)
   print "Extracting features..."
-  classes, features = extract_features(docs, categories)
+  classes, features = extract_features(docs, categories, features_to_use)
   print "Training model..."
   model = train_model(classes, features)
   print "Scoring model..."
   score_model(model, classes, features, categories)
   
 # Docs is a list of documents, in which each document is a list of sentences
-def extract_features(docs, categories):
+def extract_features(docs, categories, features_to_use):
   # a) extract features
   with open('tmp_features.tmp', 'w') as tmp_file:
     for doc in docs:
       for sentence in doc:
-        feature_dict_list = features.convert_to_feature_vectors(sentence)
+        feature_dict_list = features.convert_to_feature_vectors(sentence, features_to_use)
         for feature_dict in feature_dict_list:
           tmp_file.write(str(feature_dict)+'\n')
 
@@ -98,7 +98,10 @@ def score_model(model, classes, features, categories):
 if __name__=="__main__":
     settings_file = sys.argv[-1]
     cfg = load_configs(settings_file)
-    run_component(cfg['data']['folder'],
-             cfg['component']['categories'],
-             cfg['data']['annotation_file_format'])
+    datafolder = cfg['data']['folder']
+    annotation_file_format = cfg['data']['annotation_file_format']
+    for component in cfg['components']:
+        classes = component['categories']
+        features_to_use = component['features']
+        run_component(datafolder, annotation_file_format, classes, features_to_use)
     exit()
